@@ -199,6 +199,13 @@ public abstract class HttpRequestParser {
                 }
             }
         }
+        String prop = System.getProperty("tomcat.util.http.parser.HttpParser.requestTargetAllow", "{|}");
+        for (int i = 0; i < prop.length(); i++) {
+            char c = prop.charAt(i);
+            if ( c < 256 ){
+                ALLOWED_TARGET_CHARACTER[c] = true;
+            }
+        }
     }
 
     public HttpRequestParser(OptionMap options) {
